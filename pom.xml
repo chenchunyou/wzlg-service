@@ -43,6 +43,12 @@
                 <version>2.1.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             
             <!--阿里数据库连接池 -->
@@ -181,6 +187,13 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- 应用管理 -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-app</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -191,6 +204,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>ruoyi-app</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.version.mapper.AppVersionInfoMapper">
+    
+    <resultMap type="AppVersionInfo" id="AppVersionInfoResult">
+        <result property="versionId"    column="version_id"    />
+        <result property="appPackage"    column="app_package"    />
+        <result property="versionCode"    column="version_code"    />
+        <result property="versionName"    column="version_name"    />
+        <result property="updateContent"    column="update_content"    />
+        <result property="updateRequired"    column="update_required"    />
+        <result property="fileSize"    column="file_size"    />
+        <result property="downloadUrl"    column="download_url"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectAppVersionInfoVo">
+        select version_id, app_package, version_code, version_name, update_content, update_required, file_size, download_url, create_time, update_time from app_version_info
+    </sql>
+
+    <select id="selectAppVersionInfoList" parameterType="AppVersionInfo" resultMap="AppVersionInfoResult">
+        <include refid="selectAppVersionInfoVo"/>
+        <where>  
+            <if test="appPackage != null  and appPackage != ''"> and app_package = #{appPackage}</if>
+            <if test="versionCode != null "> and version_code = #{versionCode}</if>
+            <if test="versionName != null  and versionName != ''"> and version_name like concat('%', #{versionName}, '%')</if>
+            <if test="updateContent != null  and updateContent != ''"> and update_content like concat('%', #{updateContent}, '%')</if>
+            <if test="updateRequired != null "> and update_required = #{updateRequired}</if>
+            <if test="fileSize != null "> and file_size = #{fileSize}</if>
+            <if test="downloadUrl != null  and downloadUrl != ''"> and download_url = #{downloadUrl}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppVersionInfoById" parameterType="Long" resultMap="AppVersionInfoResult">
+        <include refid="selectAppVersionInfoVo"/>
+        where version_id = #{versionId}
+    </select>
+        
+    <insert id="insertAppVersionInfo" parameterType="AppVersionInfo" useGeneratedKeys="true" keyProperty="versionId">
+        insert into app_version_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appPackage != null and appPackage != ''">app_package,</if>
+            <if test="versionCode != null">version_code,</if>
+            <if test="versionName != null and versionName != ''">version_name,</if>
+            <if test="updateContent != null and updateContent != ''">update_content,</if>
+            <if test="updateRequired != null">update_required,</if>
+            <if test="fileSize != null">file_size,</if>
+            <if test="downloadUrl != null and downloadUrl != ''">download_url,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appPackage != null and appPackage != ''">#{appPackage},</if>
+            <if test="versionCode != null">#{versionCode},</if>
+            <if test="versionName != null and versionName != ''">#{versionName},</if>
+            <if test="updateContent != null and updateContent != ''">#{updateContent},</if>
+            <if test="updateRequired != null">#{updateRequired},</if>
+            <if test="fileSize != null">#{fileSize},</if>
+            <if test="downloadUrl != null and downloadUrl != ''">#{downloadUrl},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppVersionInfo" parameterType="AppVersionInfo">
+        update app_version_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="appPackage != null and appPackage != ''">app_package = #{appPackage},</if>
+            <if test="versionCode != null">version_code = #{versionCode},</if>
+            <if test="versionName != null and versionName != ''">version_name = #{versionName},</if>
+            <if test="updateContent != null and updateContent != ''">update_content = #{updateContent},</if>
+            <if test="updateRequired != null">update_required = #{updateRequired},</if>
+            <if test="fileSize != null">file_size = #{fileSize},</if>
+            <if test="downloadUrl != null and downloadUrl != ''">download_url = #{downloadUrl},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where version_id = #{versionId}
+    </update>
+
+    <delete id="deleteAppVersionInfoById" parameterType="Long">
+        delete from app_version_info where version_id = #{versionId}
+    </delete>
+
+    <delete id="deleteAppVersionInfoByIds" parameterType="String">
+        delete from app_version_info where version_id in 
+        <foreach item="versionId" collection="array" open="(" separator="," close=")">
+            #{versionId}
+        </foreach>
+    </delete>
+
+    <select id="selectLatestAppVersionInfo" resultMap="AppVersionInfoResult">
+        <include refid="selectAppVersionInfoVo"/>
+        where version_code = (SELECT MAX(version_code) FROM app_version_info)
+    </select>
+    
+</mapper>

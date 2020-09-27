@@ -30,6 +30,9 @@ public class RuoYiConfig
     /** 获取地址开关 */
     private static boolean addressEnabled;
 
+    /** 一个学期的周数 */
+    private int weekCnt;
+
     public String getName()
     {
         return name;
@@ -112,5 +115,13 @@ public class RuoYiConfig
     public static String getUploadPath()
     {
         return getProfile() + "/upload";
+    }
+
+    public int getWeekCnt() {
+        return weekCnt;
+    }
+
+    public void setWeekCnt(int weekCnt) {
+        this.weekCnt = weekCnt;
     }
 }

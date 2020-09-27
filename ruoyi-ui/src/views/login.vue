@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">优趣帮后台管理系统</h3>
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
@@ -29,10 +29,10 @@
           <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
         </el-input>
         <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
+          <img :src="codeUrl" @click="getCode" class="login-code-img" alt="验证码"/>
         </div>
       </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+      <el-checkbox v-model="loginForm.rememberMe" style="margin:0 0 25px 0;">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -152,7 +152,7 @@ export default {
   background-size: cover;
 }
 .title {
-  margin: 0px auto 30px auto;
+  margin: 0 auto 30px auto;
   text-align: center;
   color: #707070;
 }

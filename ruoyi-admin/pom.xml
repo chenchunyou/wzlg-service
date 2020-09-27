@@ -8,7 +8,7 @@
         <version>3.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <artifactId>ruoyi-admin</artifactId>
 
     <description>
@@ -71,6 +71,13 @@
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-generator</artifactId>
+        </dependency>
+
+        <!-- 应用管理 -->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-app</artifactId>
+            <version>3.0.0</version>
         </dependency>
 
     </dependencies>
