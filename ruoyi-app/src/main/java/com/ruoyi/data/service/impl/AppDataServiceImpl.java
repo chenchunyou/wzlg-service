@@ -93,7 +93,7 @@ public class AppDataServiceImpl implements IAppDataService {
                 String[] strings = a.text().split(" ");
                 int beginWeek = Integer.parseInt(strings[2].substring(2, 4));
                 int endWeek = Integer.parseInt(strings[2].substring(5, 7));
-                boolean isLongCourse = strings[2].contains("3-5节") || strings[2].contains("7-8节") || strings[2].contains("11-13节");
+                boolean isLongCourse = strings[2].contains("3-5节") || strings[2].contains("6-8节") || strings[2].contains("11-13节");
                 for (int i = beginWeek - 1;i < endWeek; i++) {
                     Course course = courseTable.getWeeks().get(i).getCourses().get(ktIndex);
                     course.setName(strings[0]);
